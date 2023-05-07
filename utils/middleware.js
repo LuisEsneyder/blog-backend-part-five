@@ -27,6 +27,9 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "JsonWebTokenError") {
     return response.status(400).json({ error: error.message });
   }
+  if (error.name === "TypeError") {
+    return response.status(400).json({ error: error.message });
+  }
   next(error);
 };
 const tokenExtractor = (request, response, next) => {

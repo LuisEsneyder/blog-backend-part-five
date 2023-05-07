@@ -32,12 +32,17 @@ blogsRouter.delete("/:id", userExtractor, async (request, response, next) => {
   try {
     const findBlog = await Blog.findById(request.params.id);
     const findUser = request.user;
-    if (!(findBlog.user.toString() === findUser._id.toString())) {
+    if (!(findBlog.user.toString() === findUser.id.toString())) {
       return response
         .status(401)
         .json({ error: "user is not created this blog" });
     }
     await Blog.findByIdAndRemove(findBlog.id);
+    console.log();
+    findUser.blogs = findUser.blogs.filter(
+      (ele) => ele.toString() !== findBlog.id
+    );
+    await findUser.save();
     response.status(200).end();
   } catch (error) {
     next(error);
