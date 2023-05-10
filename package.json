@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "start:test": "cross-env NODE_ENV=test node index.js",
     "build:ui": "rm -rf dist && cd ../blog-frontend && npm run build && cp -r dist ../blog",
-    "deploy:full": "npm run build:ui && git add . && git commit -m deployFull && git push origin master"
+    "deploy:full": "npm run build:ui && git add . && git add . && git commit -m deployFull && git push origin master"
   },
   "author": "Luis Fernández",
   "license": "ISC",
