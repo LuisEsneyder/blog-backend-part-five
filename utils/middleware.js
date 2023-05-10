@@ -30,6 +30,9 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "TypeError") {
     return response.status(400).json({ error: error.message });
   }
+  if (error.name === "TokenExpiredError") {
+    return response.status(400).json({ error: error.message });
+  }
   next(error);
 };
 const tokenExtractor = (request, response, next) => {
